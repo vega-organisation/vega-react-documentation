@@ -12,18 +12,32 @@ export default function LoaderExamplesShowcase() {
 
 	return (
 		<div className="vega-doc-examples">
-			<ExampleSection title="Spinner">
+			<ExampleSection title="Spinner" code={`<Loader variant="spinner" />`}>
 				<Loader variant="spinner" />
 			</ExampleSection>
-			<ExampleSection title="Skeleton">
+
+			<ExampleSection
+				title="Skeleton"
+				code={`<Loader variant="skeleton" width="240px" height="1rem" />`}
+			>
 				<Loader variant="skeleton" width="240px" height="1rem" />
 			</ExampleSection>
-			<ExampleSection title="Progress" block padded>
+
+			<ExampleSection
+				title="Progress"
+				block
+				padded
+				code={`<Loader variant="progress" value={65} />`}
+			>
 				<div style={{ width: '320px' }}>
 					<Loader variant="progress" value={65} />
 				</div>
 			</ExampleSection>
-			<ExampleSection title="Overlay">
+
+			<ExampleSection
+				title="Overlay"
+				code={`<Button variant="primary" onClick={() => setOpen(true)}>\n  Trigger overlay (2.5s)\n</Button>\n{open && <Loader variant="spinner" overlay />}`}
+			>
 				<Button variant="primary" onClick={() => setOpen(true)}>
 					Trigger overlay (2.5s)
 				</Button>

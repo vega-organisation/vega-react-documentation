@@ -10,7 +10,10 @@ const ITEMS = [
 export default function ContextMenuExamplesShowcase() {
 	return (
 		<div className="vega-doc-examples">
-			<ExampleSection title="With menu items">
+			<ExampleSection
+				title="With menu items"
+				code={`const items = [\n  { icon: '📄', label: 'Open', onClick: () => {} },\n  { icon: '✏️', label: 'Edit', onClick: () => {} },\n  { icon: '🗑️', label: 'Delete', onClick: () => {} },\n];\n\n<ContextMenu items={items}>\n  <Button variant="primary">Right-click me</Button>\n</ContextMenu>`}
+			>
 				<ContextMenu items={ITEMS}>
 					<Button variant="primary">Right-click me</Button>
 				</ContextMenu>

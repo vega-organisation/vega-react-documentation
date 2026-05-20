@@ -9,6 +9,11 @@ export default defineConfig({
 		starlight({
 			title: 'Vega React Components',
 			description: 'Documentation for the vega-react-components library.',
+			logo: {
+				light: './src/assets/logo-light.svg',
+				dark: './src/assets/logo-dark.svg',
+				replacesTitle: true,
+			},
 			customCss: ['./src/styles/vega-docs.css'],
 			social: [
 				{
