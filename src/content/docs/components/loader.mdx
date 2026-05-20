@@ -1,0 +1,85 @@
+---
+title: Loader
+description: Spinner, skeleton, and progress loading indicators with optional overlay.
+---
+
+import LoaderDemo from '../../../components/docs/LoaderDemo';
+
+import LoaderExamplesShowcase from '../../../components/docs/examples/loader';
+
+The `Loader` component displays loading feedback as a spinner, skeleton placeholder, or progress bar.
+
+## Preview
+
+<LoaderDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { Loader } from 'vega-react-components';
+
+```
+
+## Examples
+
+<LoaderExamplesShowcase client:load />
+
+### Spinner
+
+```tsx
+<Loader variant="spinner" />
+```
+
+### Skeleton line
+
+```tsx
+<Loader variant="skeleton" width="240px" height="1rem" />
+```
+
+### Skeleton card
+
+```tsx
+<Loader variant="skeleton" width="100%" height="160px" />
+```
+
+### Progress (determinate)
+
+```tsx
+<Loader variant="progress" value={65} />
+```
+
+### Progress (indeterminate)
+
+```tsx
+<Loader variant="progress" />
+```
+
+### Overlay spinner
+
+```tsx
+{
+	open && <Loader variant="spinner" overlay />;
+}
+```
+
+## API
+
+| Prop Name | Type                                    | Default Value | Required | Description                            |
+| --------- | --------------------------------------- | ------------- | -------- | -------------------------------------- |
+| `variant` | `'spinner' \| 'skeleton' \| 'progress'` | `'spinner'`   | No       | Visual variant.                        |
+| `value`   | `number` (0–100)                        | —             | No       | Progress percentage (`progress` only). |
+| `overlay` | `boolean`                               | `false`       | No       | Full-screen blocking backdrop.         |
+| `label`   | `string`                                | —             | No       | Accessible label (visually hidden).    |
+| `width`   | `string`                                | —             | No       | Skeleton width.                        |
+| `height`  | `string`                                | —             | No       | Skeleton height.                       |

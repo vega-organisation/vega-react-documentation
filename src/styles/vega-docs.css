@@ -1,0 +1,56 @@
+@import 'vega-react-components/style.css';
+
+/* Optional: isolate previews from Starlight theme clashes */
+.vega-preview {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	align-items: center;
+	padding: 1.25rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+	background: var(--sl-color-bg);
+}
+
+.vega-preview--column {
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.vega-preview--block {
+	display: block;
+}
+
+.vega-preview--loading {
+	min-height: 4.5rem;
+	justify-content: center;
+}
+
+.vega-preview__placeholder {
+	font-size: 0.875rem;
+	color: var(--sl-color-gray-3);
+}
+
+.vega-preview--toast-actions {
+	flex-wrap: wrap;
+	width: 100%;
+	padding: 0;
+	border: none;
+	background: transparent;
+}
+
+.vega-preview--padded {
+	width: 100%;
+	align-items: stretch;
+}
+
+.vega-doc-example {
+	margin: 1.5rem 0;
+}
+
+.vega-doc-example__title {
+	margin: 0 0 0.5rem;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--sl-color-text);
+}

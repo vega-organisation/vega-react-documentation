@@ -1,17 +1,41 @@
 {
-  "name": "digital-doppler",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/starlight": "^0.39.2",
-    "astro": "^6.3.1",
-    "sharp": "^0.34.5"
-  }
+	"name": "vega",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"format": "prettier --write .",
+		"format:check": "prettier --check ."
+	},
+	"dependencies": {
+		"@astrojs/react": "^5.0.5",
+		"@astrojs/starlight": "^0.39.2",
+		"@types/react": "^19.2.15",
+		"@types/react-dom": "^19.2.3",
+		"astro": "^6.3.1",
+		"lucide-react": "^1.16.0",
+		"react": "^19.2.6",
+		"react-dom": "^19.2.6",
+		"react-phone-number-input": "^3.4.16",
+		"sharp": "^0.34.5",
+		"vega-react-components": "^1.1.0"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.39.4",
+		"eslint": "^9.39.4",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-astro": "^1.7.0",
+		"eslint-plugin-react": "^7.37.5",
+		"eslint-plugin-react-hooks": "^7.1.1",
+		"globals": "^17.6.0",
+		"prettier": "^3.8.3",
+		"prettier-plugin-astro": "^0.14.1",
+		"typescript-eslint": "^8.59.4"
+	}
 }

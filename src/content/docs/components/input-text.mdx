@@ -1,0 +1,104 @@
+---
+title: InputText
+description: Text input with label, helper text, validation status, and size variants.
+---
+
+import InputTextDemo from '../../../components/docs/InputTextDemo';
+
+import InputTextExamplesShowcase from '../../../components/docs/examples/input-text';
+
+The `InputText` component is a styled text field with optional label, helper text, and visual status states.
+
+## Preview
+
+<InputTextDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { InputText } from 'vega-react-components';
+
+```
+
+## Examples
+
+<InputTextExamplesShowcase client:load />
+
+### Default
+
+```tsx
+<InputText placeholder="Ex: John Doe" />
+```
+
+### With label
+
+```tsx
+<InputText label="Username" placeholder="Enter your username" />
+```
+
+### With helper text
+
+```tsx
+<InputText label="Password" type="password" helperText="Have to be at least 8 characters." />
+```
+
+### Error
+
+```tsx
+<InputText
+	label="Email"
+	value="email@invalid"
+	status="error"
+	helperText="Please enter a valid email address."
+/>
+```
+
+### Success
+
+```tsx
+<InputText label="Email" value="john.doe@example.com" status="success" helperText="Email valid !" />
+```
+
+### Sizes
+
+```tsx
+<InputText label="Small Input" size="small" placeholder="Small" />
+<InputText label="Medium Input" size="medium" placeholder="Medium" />
+<InputText label="Large Input" size="large" placeholder="Large" />
+```
+
+### Full width
+
+```tsx
+<InputText label="Full Width Input" placeholder="I take the full width of my container" fullWidth />
+```
+
+### Disabled
+
+```tsx
+<InputText label="Input désactivé" value="Disabled input" disabled />
+```
+
+## API
+
+| Prop Name    | Type                               | Default Value | Required | Description                           |
+| ------------ | ---------------------------------- | ------------- | -------- | ------------------------------------- |
+| `label`      | `ReactNode`                        | —             | No       | Text label above the input.           |
+| `helperText` | `ReactNode`                        | —             | No       | Helper or error text below the input. |
+| `status`     | `'normal' \| 'error' \| 'success'` | `'normal'`    | No       | Visual validation status.             |
+| `variant`    | `'outlined' \| 'filled'`           | —             | No       | Input surface style.                  |
+| `size`       | `'small' \| 'medium' \| 'large'`   | `'medium'`    | No       | Size of the input.                    |
+| `fullWidth`  | `boolean`                          | `false`       | No       | Expand to full container width.       |
+
+`InputText` extends `InputHTMLAttributes<HTMLInputElement>` (except `size`).

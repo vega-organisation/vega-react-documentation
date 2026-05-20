@@ -1,0 +1,116 @@
+---
+title: PhoneNumberInput
+description: International phone number field with country selector and E.164 values.
+---
+
+import PhoneNumberInputDemo from '../../../components/docs/PhoneNumberInputDemo';
+
+import PhoneNumberExamplesShowcase from '../../../components/docs/examples/phone-number-input';
+
+The `PhoneNumberInput` component wraps `react-phone-number-input` with Vega styling, country selection, and validation status states.
+
+## Preview
+
+<PhoneNumberInputDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components react-phone-number-input
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+import 'react-phone-number-input/style.css';
+```
+
+## Import
+
+```tsx
+import { PhoneNumberInput } from 'vega-react-components';
+
+```
+
+## Examples
+
+<PhoneNumberExamplesShowcase client:load />
+
+### Default
+
+```tsx
+<PhoneNumberInput label="Phone Number" defaultCountry="FR" value={value} onChange={setValue} />
+```
+
+### With helper text
+
+```tsx
+<PhoneNumberInput
+	label="Contact"
+	helperText="We will never share your number."
+	defaultCountry="US"
+	onChange={setValue}
+/>
+```
+
+### Error
+
+```tsx
+<PhoneNumberInput
+	label="Emergency Contact"
+	status="error"
+	value="+33600"
+	helperText="Please enter a valid phone number."
+	defaultCountry="FR"
+	onChange={setValue}
+/>
+```
+
+### Success
+
+```tsx
+<PhoneNumberInput
+	label="Verified Number"
+	status="success"
+	value="+33612345678"
+	defaultCountry="FR"
+	onChange={setValue}
+/>
+```
+
+### Disabled
+
+```tsx
+<PhoneNumberInput
+	label="Disabled Input"
+	value="+33612345678"
+	disabled
+	defaultCountry="FR"
+	onChange={setValue}
+/>
+```
+
+### Full width
+
+```tsx
+<PhoneNumberInput label="Full Width Input" fullWidth defaultCountry="FR" onChange={setValue} />
+```
+
+### International (UK default)
+
+```tsx
+<PhoneNumberInput label="International Format (UK)" defaultCountry="GB" onChange={setValue} />
+```
+
+## API
+
+| Prop Name        | Type                                | Default Value | Required | Description                      |
+| ---------------- | ----------------------------------- | ------------- | -------- | -------------------------------- |
+| `defaultCountry` | `Country` (ISO 3166-1 alpha-2)      | —             | Yes      | Default country in the selector. |
+| `onChange`       | `(value?: string) => void`          | —             | Yes      | Called when the number changes.  |
+| `value`          | `string`                            | —             | No       | E.164 phone number.              |
+| `label`          | `ReactNode`                         | —             | No       | Label above the input.           |
+| `helperText`     | `ReactNode`                         | —             | No       | Helper or error text below.      |
+| `status`         | `'default' \| 'error' \| 'success'` | `'default'`   | No       | Visual validation status.        |
+| `size`           | `'small' \| 'medium' \| 'large'`    | `'medium'`    | No       | Size variant.                    |
+| `fullWidth`      | `boolean`                           | `false`       | No       | Expand to full container width.  |

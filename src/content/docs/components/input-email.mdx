@@ -1,0 +1,113 @@
+---
+title: InputEmail
+description: Email input with built-in format validation and status states.
+---
+
+import InputEmailDemo from '../../../components/docs/InputEmailDemo';
+
+import InputEmailExamplesShowcase from '../../../components/docs/examples/input-email';
+
+The `InputEmail` component is an email-specific input with optional label, helper text, and automatic format validation feedback.
+
+## Preview
+
+<InputEmailDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { InputEmail } from 'vega-react-components';
+
+```
+
+## Examples
+
+<InputEmailExamplesShowcase client:load />
+
+### Default
+
+```tsx
+<InputEmail placeholder="exemple@email.com" />
+```
+
+### With label
+
+```tsx
+<InputEmail label="Email address" placeholder="exemple@email.com" />
+```
+
+### Error
+
+```tsx
+<InputEmail label="Email address" value="not-an-email" status="error" />
+```
+
+### Error with custom message
+
+```tsx
+<InputEmail
+	label="Email address"
+	value="not-an-email"
+	status="error"
+	helperText="This email is already in use."
+/>
+```
+
+### Success
+
+```tsx
+<InputEmail
+	label="Email address"
+	value="john.doe@example.com"
+	status="success"
+	helperText="Email address is valid."
+/>
+```
+
+### Sizes
+
+```tsx
+<InputEmail label="Email address" size="small" placeholder="exemple@email.com" />
+```
+
+### Full width
+
+```tsx
+<InputEmail label="Email address" placeholder="exemple@email.com" fullWidth />
+```
+
+### Disabled
+
+```tsx
+<InputEmail label="Email address" value="john.doe@example.com" disabled />
+```
+
+### Interactive (controlled)
+
+```tsx
+const [value, setValue] = useState('');
+<InputEmail label="Email address" value={value} onChange={(e) => setValue(e.target.value)} />;
+```
+
+## API
+
+| Prop Name    | Type                                | Default Value | Required | Description                     |
+| ------------ | ----------------------------------- | ------------- | -------- | ------------------------------- |
+| `label`      | `ReactNode`                         | —             | No       | Label above the input.          |
+| `helperText` | `ReactNode`                         | —             | No       | Helper or error text below.     |
+| `status`     | `'default' \| 'error' \| 'success'` | `'default'`   | No       | Validation status override.     |
+| `size`       | `'small' \| 'medium' \| 'large'`    | `'medium'`    | No       | Size of the input.              |
+| `fullWidth`  | `boolean`                           | `false`       | No       | Expand to full container width. |
+
+`InputEmail` extends `InputHTMLAttributes<HTMLInputElement>` (except `type` and `size`).

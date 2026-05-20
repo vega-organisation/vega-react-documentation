@@ -1,0 +1,72 @@
+---
+title: Dialog
+description: Modal dialog with header, body, footer, and size variants.
+---
+
+import DialogDemo from '../../../components/docs/DialogDemo';
+
+import DialogExamplesShowcase from '../../../components/docs/examples/dialog';
+
+The `Dialog` component renders an accessible modal overlay with compound `Dialog.Header`, `Dialog.Body`, and `Dialog.Footer` sections.
+
+## Preview
+
+<DialogDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { Dialog } from 'vega-react-components';
+
+```
+
+## Examples
+
+<DialogExamplesShowcase client:load />
+
+### Default (confirm)
+
+```tsx
+<Dialog open={open} onClose={() => setOpen(false)}>
+	<Dialog.Header onClose={() => setOpen(false)}>Confirm action</Dialog.Header>
+	<Dialog.Body>Are you sure?</Dialog.Body>
+	<Dialog.Footer>...</Dialog.Footer>
+</Dialog>
+```
+
+### Sizes
+
+```tsx
+<Dialog open={open} onClose={onClose} size="sm">...</Dialog>
+<Dialog open={open} onClose={onClose} size="lg">...</Dialog>
+<Dialog open={open} onClose={onClose} size="fullscreen">...</Dialog>
+```
+
+### No backdrop close
+
+```tsx
+<Dialog open={open} onClose={onClose} closeOnBackdrop={false}>
+	...
+</Dialog>
+```
+
+## Dialog API
+
+| Prop Name         | Type                                   | Default Value | Required | Description                    |
+| ----------------- | -------------------------------------- | ------------- | -------- | ------------------------------ |
+| `open`            | `boolean`                              | —             | Yes      | Whether the dialog is visible. |
+| `onClose`         | `() => void`                           | —             | Yes      | Close handler.                 |
+| `children`        | `ReactNode`                            | —             | Yes      | Dialog content.                |
+| `size`            | `'sm' \| 'md' \| 'lg' \| 'fullscreen'` | `'md'`        | No       | Panel width variant.           |
+| `closeOnBackdrop` | `boolean`                              | `true`        | No       | Close on backdrop click.       |

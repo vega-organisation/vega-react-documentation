@@ -1,0 +1,123 @@
+---
+title: Toast
+description: Toast notifications via ToastProvider and the useToast hook.
+---
+
+import ToastDemo from '../../../components/docs/ToastDemo';
+
+import ToastExamplesShowcase from '../../../components/docs/examples/toast';
+
+Toast notifications are provided by `ToastProvider` at the app root and triggered imperatively with the `useToast` hook.
+
+## Preview
+
+<ToastDemo client:only="react" />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { ToastProvider, useToast } from 'vega-react-components';
+
+```
+
+## Astro / SSR
+
+`ToastProvider` calls `createPortal(..., document.body)` on every render. Use `client:only="react"` so it never runs on the server.
+
+## Setup
+
+```tsx
+import { ToastProvider } from 'vega-react-components';
+
+export function App({ children }: { children: React.ReactNode }) {
+	return <ToastProvider position="top-right">{children}</ToastProvider>;
+}
+```
+
+## Examples
+
+<ToastExamplesShowcase client:only="react" />
+
+### Success
+
+```tsx
+const { add } = useToast();
+
+<Button
+	variant="success"
+	onClick={() =>
+		add({ variant: 'success', title: 'Saved!', message: 'Your changes have been saved.' })
+	}
+>
+	Show success toast
+</Button>;
+```
+
+### Error
+
+```tsx
+add({ variant: 'error', title: 'Error', message: 'Something went wrong. Please try again.' });
+```
+
+### Warning
+
+```tsx
+add({ variant: 'warning', message: 'Your session will expire in 5 minutes.' });
+```
+
+### Info
+
+```tsx
+add({ variant: 'info', message: 'A new version is available.' });
+```
+
+### No auto-dismiss
+
+```tsx
+add({
+	variant: 'info',
+	title: 'Persistent',
+	message: "This toast won't auto-dismiss. Close it manually.",
+	duration: 0,
+});
+```
+
+### Stacked toasts
+
+```tsx
+add({ variant: 'success', message: 'Profile updated.' });
+add({ variant: 'error', title: 'Upload failed', message: 'File size exceeds 5MB.' });
+add({ variant: 'warning', message: 'Storage almost full.' });
+add({ variant: 'info', message: 'New message received.' });
+```
+
+## ToastProvider API
+
+| Prop Name  | Type                                                                                              | Default Value | Required | Description                                |
+| ---------- | ------------------------------------------------------------------------------------------------- | ------------- | -------- | ------------------------------------------ |
+| `children` | `ReactNode`                                                                                       | —             | Yes      | Application tree that can call `useToast`. |
+| `position` | `'top-right' \| 'top-left' \| 'top-center' \| 'bottom-right' \| 'bottom-left' \| 'bottom-center'` | `'top-right'` | No       | Viewport corner for the toast stack.       |
+
+## ToastData (passed to `add`)
+
+| Prop Name  | Type                                          | Default Value | Required | Description                                    |
+| ---------- | --------------------------------------------- | ------------- | -------- | ---------------------------------------------- |
+| `message`  | `ReactNode`                                   | —             | Yes      | Main toast body.                               |
+| `title`    | `string`                                      | —             | No       | Optional heading.                              |
+| `variant`  | `'success' \| 'error' \| 'warning' \| 'info'` | `'info'`      | No       | Visual style.                                  |
+| `duration` | `number` (ms)                                 | `4000`        | No       | Auto-dismiss delay; `0` disables auto-dismiss. |
+
+## useToast
+
+Returns `{ add, remove }`. `add(toast)` enqueues a notification and returns its `id`. `remove(id)` dismisses a specific toast.

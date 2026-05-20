@@ -1,0 +1,95 @@
+---
+title: Button
+description: Styled button with variants, sizes, and full-width layout.
+---
+
+import ButtonDemo from '../../../components/docs/ButtonDemo';
+
+import ButtonExamplesShowcase from '../../../components/docs/examples/button';
+
+The `Button` component renders an accessible `<button>` with Vega design tokens, variant styles, and size presets.
+
+## Preview
+
+<ButtonDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+Import the package stylesheet once in your application root:
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { Button } from 'vega-react-components';
+
+```
+
+## Examples
+
+Interact with each variant below, then copy the matching code.
+
+<ButtonExamplesShowcase client:load />
+
+### Primary
+
+```tsx
+<Button variant="primary">Primary Button</Button>
+```
+
+### Secondary
+
+```tsx
+<Button variant="secondary">Secondary Button</Button>
+```
+
+### Danger
+
+```tsx
+<Button variant="danger">Danger Button</Button>
+```
+
+### Success
+
+```tsx
+<Button variant="success">Success Button</Button>
+```
+
+### Sizes
+
+```tsx
+<Button size="small">Small Button</Button>
+<Button size="medium">Medium Button</Button>
+<Button size="large">Large Button</Button>
+```
+
+### Full width
+
+```tsx
+<Button fullWidth>Full Width Button</Button>
+```
+
+### Disabled
+
+```tsx
+<Button disabled>Disabled Button</Button>
+```
+
+## API
+
+| Prop Name   | Type                                                | Default Value | Required | Description                                  |
+| ----------- | --------------------------------------------------- | ------------- | -------- | -------------------------------------------- |
+| `children`  | `ReactNode`                                         | —             | Yes      | Button label or nested content.              |
+| `variant`   | `'primary' \| 'secondary' \| 'danger' \| 'success'` | `'primary'`   | No       | Visual style of the button.                  |
+| `size`      | `'small' \| 'medium' \| 'large'`                    | `'medium'`    | No       | Padding and font scale.                      |
+| `fullWidth` | `boolean`                                           | `false`       | No       | Stretch the button to 100% of its container. |
+
+`Button` extends `ButtonHTMLAttributes<HTMLButtonElement>`, so native attributes (`onClick`, `disabled`, `type`, `aria-*`, `className`, etc.) are supported.

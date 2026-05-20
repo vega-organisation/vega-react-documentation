@@ -1,0 +1,92 @@
+---
+title: FormWrapper
+description: Form container with submit state, global errors, and useFormContext for children.
+---
+
+import FormWrapperDemo from '../../../components/docs/FormWrapperDemo';
+
+import FormWrapperExamplesShowcase from '../../../components/docs/examples/form-wrapper';
+
+The `FormWrapper` component wraps form fields, handles submit/disabled/submitting state, and exposes context to child inputs via `useFormContext`.
+
+## Preview
+
+<FormWrapperDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { FormWrapper, useFormContext } from 'vega-react-components';
+
+```
+
+## Examples
+
+<FormWrapperExamplesShowcase client:load />
+
+### Default
+
+```tsx
+<FormWrapper onSubmit={() => setSubmitted(true)}>
+	<InputText label="Email" fullWidth />
+	<Button type="submit" fullWidth>
+		Se connecter
+	</Button>
+</FormWrapper>
+```
+
+### Submitting
+
+```tsx
+<FormWrapper onSubmit={() => {}} isSubmitting>
+	<Button type="submit" disabled>
+		Se connecter
+	</Button>
+</FormWrapper>
+```
+
+### With global error
+
+```tsx
+<FormWrapper onSubmit={() => {}} error="Identifiants incorrects.">
+	<InputText status="error" fullWidth />
+</FormWrapper>
+```
+
+### Disabled
+
+```tsx
+<FormWrapper onSubmit={() => {}} disabled>
+	<InputText disabled fullWidth />
+</FormWrapper>
+```
+
+### Gap variants
+
+```tsx
+<FormWrapper gap="sm">...</FormWrapper>
+<FormWrapper gap="md">...</FormWrapper>
+<FormWrapper gap="lg">...</FormWrapper>
+```
+
+## FormWrapper API
+
+| Prop Name      | Type                     | Default Value | Required | Description           |
+| -------------- | ------------------------ | ------------- | -------- | --------------------- |
+| `onSubmit`     | `(e: FormEvent) => void` | —             | Yes      | Submit handler.       |
+| `children`     | `ReactNode`              | —             | Yes      | Form fields.          |
+| `isSubmitting` | `boolean`                | `false`       | No       | Submitting state.     |
+| `disabled`     | `boolean`                | `false`       | No       | Disables the form.    |
+| `error`        | `string`                 | —             | No       | Global error message. |
+| `gap`          | `'sm' \| 'md' \| 'lg'`   | `'md'`        | No       | Vertical spacing.     |

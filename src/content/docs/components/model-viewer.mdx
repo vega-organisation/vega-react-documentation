@@ -1,0 +1,92 @@
+---
+title: ModelViewer
+description: Interactive 3D GLTF/GLB viewer powered by React Three Fiber.
+---
+
+import ModelViewerDemo from '../../../components/docs/ModelViewerDemo';
+
+import ModelViewerExamplesShowcase from '../../../components/docs/examples/model-viewer';
+
+The `ModelViewer` component loads and displays `.gltf` / `.glb` models with orbit controls, environments, and optional auto-rotation.
+
+## Preview
+
+<ModelViewerDemo client:only="react" />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { ModelViewer } from 'vega-react-components';
+
+```
+
+## Examples
+
+<ModelViewerExamplesShowcase client:only="react" />
+
+Use `client:only="react"` in Astro — this component requires WebGL in the browser.
+
+### Default
+
+```tsx
+<ModelViewer src={MODEL_URL} width={480} height={360} />
+```
+
+### Auto-rotate
+
+```tsx
+<ModelViewer src={MODEL_URL} autoRotate autoRotateSpeed={1.5} />
+```
+
+### Mouse parallax
+
+```tsx
+<ModelViewer
+	src={MODEL_URL}
+	mouseParallax
+	mouseParallaxIntensity={0.3}
+	orbit={false}
+	zoom={false}
+/>
+```
+
+### Rotated and scaled
+
+```tsx
+<ModelViewer src={MODEL_URL} rotation={[0, 45, 0]} scale={1.2} />
+```
+
+### Sunset environment
+
+```tsx
+<ModelViewer src={MODEL_URL} environment="sunset" background="#1a0f2e" />
+```
+
+### No controls
+
+```tsx
+<ModelViewer src={MODEL_URL} orbit={false} zoom={false} pan={false} />
+```
+
+## API
+
+| Prop Name     | Type                     | Default Value | Required | Description                |
+| ------------- | ------------------------ | ------------- | -------- | -------------------------- |
+| `src`         | `string`                 | —             | Yes      | `.gltf` / `.glb` model URL |
+| `width`       | `number \| string`       | `'100%'`      | No       | Canvas width               |
+| `height`      | `number \| string`       | `400`         | No       | Canvas height              |
+| `autoRotate`  | `boolean`                | `false`       | No       | Continuous rotation        |
+| `orbit`       | `boolean`                | `true`        | No       | Click-drag rotation        |
+| `zoom`        | `boolean`                | `true`        | No       | Mouse-wheel zoom           |
+| `environment` | `ModelViewerEnvironment` | `'studio'`    | No       | HDR lighting preset        |

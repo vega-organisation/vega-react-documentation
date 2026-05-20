@@ -1,0 +1,93 @@
+---
+title: Tooltip
+description: Accessible tooltip with placement, trigger modes, and viewport-aware positioning.
+---
+
+import TooltipDemo from '../../../components/docs/TooltipDemo';
+
+import TooltipExamplesShowcase from '../../../components/docs/examples/tooltip';
+
+The `Tooltip` component attaches accessible tooltip content to a single child element with hover, click, or context-menu triggers.
+
+## Preview
+
+<TooltipDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { Tooltip } from 'vega-react-components';
+
+```
+
+## Examples
+
+<TooltipExamplesShowcase client:load />
+
+### Hover (top)
+
+```tsx
+<Tooltip trigger="hover" placement="top" content="Tooltip on top">
+	<Button>Hover me</Button>
+</Tooltip>
+```
+
+### Hover (bottom)
+
+```tsx
+<Tooltip trigger="hover" placement="bottom" content="Tooltip on bottom">
+	<Button>Hover me</Button>
+</Tooltip>
+```
+
+### Hover (left & right)
+
+```tsx
+<Tooltip placement="left" content="Tooltip on left">...</Tooltip>
+<Tooltip placement="right" content="Tooltip on right">...</Tooltip>
+```
+
+### Click trigger
+
+```tsx
+<Tooltip trigger="click" content="Click again or press Escape to close">
+	<Button>Click me</Button>
+</Tooltip>
+```
+
+### Hover and click
+
+```tsx
+<Tooltip trigger="both" content="Hover or left-click to toggle">
+	<Button>Hover or click</Button>
+</Tooltip>
+```
+
+### Context menu trigger
+
+```tsx
+<Tooltip trigger="contextmenu" placement="right" content="Right-click to toggle">
+	<Button>Right-click me</Button>
+</Tooltip>
+```
+
+## API
+
+| Prop Name   | Type                                            | Default Value | Required | Description                |
+| ----------- | ----------------------------------------------- | ------------- | -------- | -------------------------- |
+| `children`  | `ReactElement`                                  | —             | Yes      | Single trigger element.    |
+| `content`   | `ReactNode`                                     | —             | Yes      | Tooltip body.              |
+| `placement` | `'top' \| 'bottom' \| 'left' \| 'right'`        | `'top'`       | No       | Preferred placement.       |
+| `trigger`   | `'hover' \| 'click' \| 'contextmenu' \| 'both'` | `'hover'`     | No       | How the tooltip opens.     |
+| `openDelay` | `number`                                        | —             | No       | Delay (ms) before showing. |

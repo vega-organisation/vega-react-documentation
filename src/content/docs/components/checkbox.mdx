@@ -1,0 +1,121 @@
+---
+title: Checkbox
+description: Accessible checkbox with label, description, error state, and indeterminate support.
+---
+
+import CheckboxDemo from '../../../components/docs/CheckboxDemo';
+
+import CheckboxExamplesShowcase from '../../../components/docs/examples/checkbox';
+
+The `Checkbox` component renders a styled checkbox with optional label, description, error message, and indeterminate state.
+
+## Preview
+
+<CheckboxDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { Checkbox } from 'vega-react-components';
+
+```
+
+## Examples
+
+<CheckboxExamplesShowcase client:load />
+
+### Default
+
+```tsx
+<Checkbox label="Accepter les conditions" />
+```
+
+### Checked
+
+```tsx
+<Checkbox label="Option activée" defaultChecked />
+```
+
+### Indeterminate
+
+```tsx
+<Checkbox label="Sélection partielle" indeterminate />
+```
+
+### Disabled
+
+```tsx
+<Checkbox label="Option indisponible" disabled />
+```
+
+### Disabled and checked
+
+```tsx
+<Checkbox label="Option validée (non modifiable)" disabled defaultChecked />
+```
+
+### With description
+
+```tsx
+<Checkbox
+	label="S'abonner à la newsletter"
+	description="Vous recevrez un e-mail par semaine maximum."
+/>
+```
+
+### With error
+
+```tsx
+<Checkbox label="Accepter les conditions" error="Vous devez cocher cette case pour continuer." />
+```
+
+### Sizes
+
+```tsx
+<Checkbox size="small" label="Petite (Small)" />
+<Checkbox size="medium" label="Moyenne (Medium)" />
+<Checkbox size="large" label="Grande (Large)" />
+```
+
+### Interactive (controlled)
+
+```tsx
+import { useState } from 'react';
+
+import { Checkbox } from 'vega-react-components';
+
+function ToggleOption() {
+	const [checked, setChecked] = useState(false);
+	return (
+		<Checkbox
+			label={checked ? 'Activé' : 'Désactivé'}
+			checked={checked}
+			onChange={() => setChecked(!checked)}
+		/>
+	);
+}
+```
+
+## API
+
+| Prop Name       | Type                             | Default Value | Required | Description                                 |
+| --------------- | -------------------------------- | ------------- | -------- | ------------------------------------------- |
+| `label`         | `ReactNode`                      | —             | No       | Label beside the checkbox.                  |
+| `description`   | `ReactNode`                      | —             | No       | Descriptive text below the label.           |
+| `error`         | `string`                         | —             | No       | Error message displayed below the checkbox. |
+| `size`          | `'small' \| 'medium' \| 'large'` | `'medium'`    | No       | Checkbox scale.                             |
+| `indeterminate` | `boolean`                        | `false`       | No       | Partial selection state.                    |
+| `fullWidth`     | `boolean`                        | `false`       | No       | Stretch to container width.                 |
+
+`Checkbox` extends `InputHTMLAttributes<HTMLInputElement>` (except `size` and `type`).

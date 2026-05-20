@@ -1,0 +1,68 @@
+---
+title: ContextMenu
+description: Right-click context menu wrapper with optional action items.
+---
+
+import ContextMenuDemo from '../../../components/docs/ContextMenuDemo';
+
+import ContextMenuExamplesShowcase from '../../../components/docs/examples/context-menu';
+
+The `ContextMenu` component wraps children and shows a context menu on right-click, with optional icon-labelled actions.
+
+## Preview
+
+<ContextMenuDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { ContextMenu } from 'vega-react-components';
+
+```
+
+## Examples
+
+<ContextMenuExamplesShowcase client:load />
+
+### Default
+
+```tsx
+<ContextMenu onClick={() => alert('context menu clicked')}>
+	<div>Right-click me</div>
+</ContextMenu>
+```
+
+### With items
+
+```tsx
+<ContextMenu items={menuItems}>
+	<Button variant="primary">Right-click me</Button>
+</ContextMenu>
+```
+
+### Disabled
+
+```tsx
+<ContextMenu disabled>
+	<Button>Right-click me (disabled)</Button>
+</ContextMenu>
+```
+
+## API
+
+| Prop Name  | Type         | Default Value | Required | Description                   |
+| ---------- | ------------ | ------------- | -------- | ----------------------------- |
+| `children` | `ReactNode`  | —             | Yes      | Context menu trigger element. |
+| `items`    | `MenuItem[]` | —             | No       | Menu entries on right-click.  |
+| `disabled` | `boolean`    | `false`       | No       | Disables the context menu.    |

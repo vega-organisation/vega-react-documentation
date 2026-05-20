@@ -1,0 +1,89 @@
+---
+title: Card
+description: Composable card layout with media, header, body, footer, and variants.
+---
+
+import CardDemo from '../../../components/docs/CardDemo';
+
+import CardExamplesShowcase from '../../../components/docs/examples/card';
+
+The `Card` component is a compound layout primitive with `Card.Media`, `Card.Header`, `Card.Body`, and `Card.Footer` subcomponents.
+
+## Preview
+
+<CardDemo client:load />
+
+## Installation
+
+```bash
+npm install vega-react-components
+```
+
+```tsx
+import 'vega-react-components/style.css';
+
+```
+
+## Import
+
+```tsx
+import { Card } from 'vega-react-components';
+
+```
+
+## Examples
+
+<CardExamplesShowcase client:load />
+
+### Default
+
+```tsx
+<Card variant="default">
+	<Card.Header>...</Card.Header>
+	<Card.Body>...</Card.Body>
+	<Card.Footer>...</Card.Footer>
+</Card>
+```
+
+### Elevated
+
+```tsx
+<Card variant="elevated">
+	<Card.Media src={url} alt="Landscape" ratio="16/9" />
+	<Card.Body>Elevated cards use box shadows.</Card.Body>
+</Card>
+```
+
+### Outlined
+
+```tsx
+<Card variant="outlined">
+	<Card.Body>Minimal card with a 2px border.</Card.Body>
+</Card>
+```
+
+### Interactive
+
+```tsx
+<Card variant="interactive" onClick={() => alert('Card clicked!')}>
+	<Card.Media src={url} ratio="16/9" />
+	<Card.Body>Click or press Enter/Space.</Card.Body>
+</Card>
+```
+
+### Media aspect ratios
+
+```tsx
+<Card.Media src={url} ratio="16/9" />
+<Card.Media src={url} ratio="4/3" />
+<Card.Media src={url} ratio="1/1" />
+<Card.Media src={url} ratio="3/4" />
+```
+
+## Card API
+
+| Prop Name  | Type                                                     | Default Value | Required | Description               |
+| ---------- | -------------------------------------------------------- | ------------- | -------- | ------------------------- |
+| `children` | `ReactNode`                                              | —             | Yes      | Card content.             |
+| `variant`  | `'default' \| 'elevated' \| 'outlined' \| 'interactive'` | `'default'`   | No       | Visual style.             |
+| `onClick`  | `() => void`                                             | —             | No       | Makes the card clickable. |

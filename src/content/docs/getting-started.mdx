@@ -1,0 +1,64 @@
+---
+title: Getting Started
+description: Install vega-react-components and use it in your React app.
+---
+
+## Installation
+
+Install the library and its required icon peer dependency:
+
+```bash
+npm install vega-react-components lucide-react
+```
+
+If you use `PhoneNumberInput`, also install:
+
+```bash
+npm install react-phone-number-input
+```
+
+Peer dependencies: **React 18+** and **React DOM**.
+
+## Global styles
+
+Import the library stylesheet once at your app entry (e.g. root layout):
+
+```tsx
+import 'vega-react-components/style.css';
+```
+
+This documentation site loads the same stylesheet via Starlight `customCss` in `astro.config.mjs`.
+
+## Basic usage
+
+Components are standard React elements. Use them inside a client boundary when your framework requires it (e.g. Next.js App Router):
+
+```tsx
+'use client';
+
+import { Button } from 'vega-react-components';
+
+export function Example() {
+	return <Button variant="primary">Click me</Button>;
+}
+```
+
+## TypeScript
+
+The package ships with TypeScript declarations (`dist/index.d.ts`). No extra `@types` package is required. Ensure your `tsconfig.json` uses a modern module resolution compatible with your bundler (Vite, Next.js, etc.).
+
+## Server-side rendering (SSR)
+
+Some components use browser APIs during render (for example `ToastProvider` portals to `document.body`, `Dialog` and `Tooltip` use portals when open, and `ModelViewer` uses WebGL).
+
+In **Astro** or other SSR frameworks, render those components only on the client:
+
+```mdx
+import ToastDemo from '../../../components/docs/ToastDemo';
+
+<ToastDemo client:only="react" />
+```
+
+In **Next.js App Router**, keep them in a `'use client'` file. Do not render `ToastProvider` in a Server Component.
+
+This documentation site wraps every live preview in a `PreviewGate` helper so library code never runs during the static build.
