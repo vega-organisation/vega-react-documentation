@@ -6,7 +6,12 @@ export default function FormWrapperExamplesShowcase() {
 	const [submitted, setSubmitted] = useState(false);
 	return (
 		<div className="vega-doc-examples">
-			<ExampleSection title="Login form" column padded>
+			<ExampleSection
+				title="Login form"
+				column
+				padded
+				code={`<FormWrapper onSubmit={() => setSubmitted(true)}>\n  <InputText label="Email" placeholder="you@example.com" fullWidth />\n  <InputText label="Password" type="password" placeholder="••••••••" fullWidth />\n  <Button type="submit" fullWidth>Se connecter</Button>\n</FormWrapper>`}
+			>
 				<FormWrapper onSubmit={() => setSubmitted(true)}>
 					<InputText label="Email" placeholder="you@example.com" fullWidth />
 					<InputText label="Password" type="password" placeholder="••••••••" fullWidth />
@@ -18,7 +23,13 @@ export default function FormWrapperExamplesShowcase() {
 					)}
 				</FormWrapper>
 			</ExampleSection>
-			<ExampleSection title="With error" column padded>
+
+			<ExampleSection
+				title="With error"
+				column
+				padded
+				code={`<FormWrapper onSubmit={() => {}} error="Identifiants incorrects.">\n  <InputText label="Email" fullWidth status="error" />\n  <Button type="submit" fullWidth>Retry</Button>\n</FormWrapper>`}
+			>
 				<FormWrapper onSubmit={() => {}} error="Identifiants incorrects.">
 					<InputText label="Email" fullWidth status="error" />
 					<Button type="submit" fullWidth>

@@ -1,29 +1,108 @@
 ---
 title: Vega React Components
-description: Documentation for vega-react-components.
+description: A modern, accessible React component library — TypeScript-first, SSR-safe, dark mode out of the box.
 template: splash
 hero:
-  tagline: A modern React component library — documented with Astro Starlight.
-  actions:
-    - text: Get started
-      link: /getting-started/
-      icon: right-arrow
-    - text: Button component
-      link: /components/button/
-      icon: document
-    - text: npm package
-      link: https://www.npmjs.com/package/vega-react-components
-      icon: external
-      variant: minimal
+  tagline: ''
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import AnimatedHero from '../../components/home/AnimatedHero';
 
-<CardGrid stagger>
-	<Card title="Getting started" icon="open-book">
-		Install the package and import styles in [Getting Started](/getting-started/).
-	</Card>
-	<Card title="Live previews" icon="laptop">
-		Each component page includes hydrated React demos powered by `@astrojs/react`.
-	</Card>
-</CardGrid>
+<AnimatedHero client:load />
+
+<section class="vega-stats">
+	<div class="vega-stat">
+		<div class="vega-stat__num">13</div>
+		<div class="vega-stat__label">Components</div>
+	</div>
+	<div class="vega-stat">
+		<div class="vega-stat__num">100%</div>
+		<div class="vega-stat__label">TypeScript</div>
+	</div>
+	<div class="vega-stat">
+		<div class="vega-stat__num">0</div>
+		<div class="vega-stat__label">Runtime deps*</div>
+	</div>
+	<div class="vega-stat">
+		<div class="vega-stat__num">A11y</div>
+		<div class="vega-stat__label">First-class</div>
+	</div>
+</section>
+
+<section class="vega-features">
+	<div class="vega-feature">
+		<div class="vega-feature__icon" aria-hidden="true">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<polyline points="16 18 22 12 16 6" />
+				<polyline points="8 6 2 12 8 18" />
+			</svg>
+		</div>
+		<h3 class="vega-feature__title">TypeScript-first</h3>
+		<p class="vega-feature__text">Full type declarations shipped in the package. No extra @types install required. IntelliSense everywhere.</p>
+	</div>
+
+	<div class="vega-feature">
+		<div class="vega-feature__icon" aria-hidden="true">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+				<path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+				<path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+				<path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+			</svg>
+		</div>
+		<h3 class="vega-feature__title">SSR-safe</h3>
+		<p class="vega-feature__text">Portal-based components (Toast, Dialog, Tooltip) work in Astro, Next.js App Router and any SSR framework.</p>
+	</div>
+
+	<div class="vega-feature">
+		<div class="vega-feature__icon" aria-hidden="true">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+			</svg>
+		</div>
+		<h3 class="vega-feature__title">Dark mode</h3>
+		<p class="vega-feature__text">Every component respects the user's color-scheme preference out of the box — no extra setup needed.</p>
+	</div>
+
+	<div class="vega-feature">
+		<div class="vega-feature__icon" aria-hidden="true">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<circle cx="12" cy="12" r="10" />
+				<path d="m9 12 2 2 4-4" />
+			</svg>
+		</div>
+		<h3 class="vega-feature__title">Accessible</h3>
+		<p class="vega-feature__text">Keyboard navigation, ARIA roles, focus management — every component follows WAI-ARIA patterns.</p>
+	</div>
+
+	<div class="vega-feature">
+		<div class="vega-feature__icon" aria-hidden="true">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+			</svg>
+		</div>
+		<h3 class="vega-feature__title">Live previews</h3>
+		<p class="vega-feature__text">Each component page includes interactive React demos. See it, click it, copy the code.</p>
+	</div>
+
+	<div class="vega-feature">
+		<div class="vega-feature__icon" aria-hidden="true">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M12 2 2 7l10 5 10-5-10-5z" />
+				<path d="m2 17 10 5 10-5" />
+				<path d="m2 12 10 5 10-5" />
+			</svg>
+		</div>
+		<h3 class="vega-feature__title">Composable</h3>
+		<p class="vega-feature__text">Sub-components (Card.Body, Dialog.Header, Tooltip…) give you control without ceremony.</p>
+	</div>
+</section>
+
+<section class="vega-cta">
+	<h2 class="vega-cta__title">Ready to ship?</h2>
+	<p class="vega-cta__text">One install. One import. Production code in under a minute.</p>
+	<div class="vega-cta__install">
+		<code>npm install vega-react-components</code>
+	</div>
+	<a href="/getting-started/" class="vega-cta__link">Read the install guide →</a>
+</section>

@@ -50,7 +50,10 @@ export default function ToastExamplesShowcase() {
 	return (
 		<ToastProvider position="top-right">
 			<div className="vega-doc-examples">
-				<ExampleSection title="Click to show toasts">
+				<ExampleSection
+					title="Click to show toasts"
+					code={`import { ToastProvider, useToast, Button } from 'vega-react-components';\n\nfunction App() {\n  return (\n    <ToastProvider position="top-right">\n      <ToastButtons />\n    </ToastProvider>\n  );\n}\n\nfunction ToastButtons() {\n  const { add } = useToast();\n  return (\n    <Button\n      variant="success"\n      onClick={() => add({ variant: 'success', title: 'Saved!', message: 'Changes saved.' })}\n    >\n      Success toast\n    </Button>\n  );\n}`}
+				>
 					<ToastButtons />
 				</ExampleSection>
 			</div>

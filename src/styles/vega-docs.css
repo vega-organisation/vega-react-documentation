@@ -1,20 +1,120 @@
 @import 'vega-react-components/style.css';
 
-/* Optional: isolate previews from Starlight theme clashes */
+/* =============================================
+   VEGA BRAND — DARK MODE (:root)
+   ============================================= */
+:root {
+	--sl-color-accent-low: #1e0f4a;
+	--sl-color-accent: #8b5cf6;
+	--sl-color-accent-high: #c4b5fd;
+	--vega-checker-bg: #0e0e1a;
+	--vega-checker-tile: #1e1e38;
+}
+
+/* =============================================
+   VEGA BRAND — LIGHT MODE
+   ============================================= */
+[data-theme='light'] {
+	--sl-color-accent-low: #ede9fe;
+	--sl-color-accent: #6d28d9;
+	--sl-color-accent-high: #4c1d95;
+	--vega-checker-bg: #f5f5fc;
+	--vega-checker-tile: #e8e8f4;
+}
+
+/* =============================================
+   RIGHT SIDEBAR — "On this page" heading fix
+   ============================================= */
+.right-sidebar h2 {
+	font-size: 0.75rem !important;
+	font-weight: 600 !important;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	color: var(--sl-color-gray-3);
+}
+
+/* =============================================
+   LEFT SIDEBAR — hover glide transition
+   ============================================= */
+.sidebar-content a:not([aria-current='page']) {
+	transition:
+		color 0.15s ease,
+		translate 0.15s ease;
+}
+
+.sidebar-content a:not([aria-current='page']):hover {
+	translate: 3px 0;
+}
+
+/* =============================================
+   BUG FIX — Dark mode override for vega-react-components
+   The library sets all its vars in :root (no dark mode).
+   We override the PRIMITIVE tokens (--neutral-*) so every
+   derived variable (--bg-surface, --color-secondary, etc.)
+   resolves correctly — matching how the library itself wires them.
+   ============================================= */
+[data-theme='dark'] .vega-preview {
+	/* Primitive palette — mirrors library :root but inverted */
+	--neutral-0: #1e1e2e;
+	--neutral-100: #252536;
+	--neutral-200: #3a3a52;
+	--neutral-300: #5a5a78;
+	--neutral-900: #e2e8f0;
+	/* Derived tokens that use the primitives above */
+	--bg-surface: var(--neutral-0);
+	--bg-disabled: var(--neutral-100);
+	--text-main: var(--neutral-900);
+	--text-secondary: var(--neutral-300);
+	--text-inverse: var(--neutral-0);
+	--border-default: var(--neutral-200);
+	--border-focus: #a78bfa;
+	--color-secondary: var(--neutral-200);
+	--color-bg-hover: #2a2a3e;
+}
+
+/* =============================================
+   CHECKERBOARD MIXIN (shared)
+   ============================================= */
+.vega-checker {
+	background-color: var(--vega-checker-bg);
+	background-image:
+		linear-gradient(45deg, var(--vega-checker-tile) 25%, transparent 25%),
+		linear-gradient(-45deg, var(--vega-checker-tile) 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, var(--vega-checker-tile) 75%),
+		linear-gradient(-45deg, transparent 75%, var(--vega-checker-tile) 75%);
+	background-size: 20px 20px;
+	background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* =============================================
+   STANDALONE PREVIEW (top of component pages)
+   ============================================= */
 .vega-preview {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.75rem;
+	gap: 1rem;
 	align-items: center;
-	padding: 1.25rem;
+	justify-content: center !important;
+	min-height: 140px;
+	padding: 2rem;
 	border: 1px solid var(--sl-color-gray-5);
-	border-radius: 0.5rem;
-	background: var(--sl-color-bg);
+	border-radius: 0.75rem;
+	background-color: var(--vega-checker-bg);
+	background-image:
+		linear-gradient(45deg, var(--vega-checker-tile) 25%, transparent 25%),
+		linear-gradient(-45deg, var(--vega-checker-tile) 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, var(--vega-checker-tile) 75%),
+		linear-gradient(-45deg, transparent 75%, var(--vega-checker-tile) 75%);
+	background-size: 20px 20px;
+	background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+	margin: 0.75rem 0;
 }
 
 .vega-preview--column {
 	flex-direction: column;
 	align-items: stretch;
+	max-width: 480px;
+	margin-inline: auto;
 }
 
 .vega-preview--block {
@@ -22,7 +122,7 @@
 }
 
 .vega-preview--loading {
-	min-height: 4.5rem;
+	min-height: 5rem;
 	justify-content: center;
 }
 
@@ -42,15 +142,887 @@
 .vega-preview--padded {
 	width: 100%;
 	align-items: stretch;
+	padding-block: 2.5rem;
 }
 
-.vega-doc-example {
+/* =============================================
+   EXAMPLE SECTION WRAPPER
+   ============================================= */
+.vega-doc-examples {
 	margin: 1.5rem 0;
 }
 
+.vega-doc-example {
+	margin: 1.75rem 0;
+}
+
 .vega-doc-example__title {
-	margin: 0 0 0.5rem;
-	font-size: 1rem;
+	margin: 0 0 0.625rem;
+	font-size: 0.8125rem;
 	font-weight: 600;
+	color: var(--sl-color-gray-3);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+/* =============================================
+   TAB SWITCHER BOX
+   ============================================= */
+.vega-example-box {
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.75rem;
+	overflow: hidden;
+}
+
+.vega-tab-bar {
+	display: flex;
+	align-items: flex-end;
+	padding: 0 0.25rem;
+	border-bottom: 1px solid var(--sl-color-gray-5);
+	background: var(--sl-color-bg-nav);
+}
+
+.vega-tab {
+	padding: 0.5rem 1rem;
+	font-size: 0.8125rem;
+	font-weight: 500;
+	color: var(--sl-color-gray-3);
+	background: transparent;
+	border: none;
+	border-bottom: 2px solid transparent;
+	cursor: pointer;
+	transition: color 0.15s ease;
+	margin-bottom: -1px;
+	line-height: 1.4;
+}
+
+.vega-tab:hover:not(.vega-tab--active) {
 	color: var(--sl-color-text);
+}
+
+.vega-tab--active {
+	color: var(--sl-color-accent);
+	border-bottom-color: var(--sl-color-accent);
+}
+
+/* Preview inside tab box — real checkerboard, no own border */
+.vega-example-box .vega-preview {
+	border: none;
+	border-radius: 0;
+	margin: 0;
+	min-height: 140px;
+	justify-content: center !important;
+	align-items: center;
+	background-color: var(--vega-checker-bg);
+	background-image:
+		linear-gradient(45deg, var(--vega-checker-tile) 25%, transparent 25%),
+		linear-gradient(-45deg, var(--vega-checker-tile) 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, var(--vega-checker-tile) 75%),
+		linear-gradient(-45deg, transparent 75%, var(--vega-checker-tile) 75%);
+	background-size: 20px 20px;
+	background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.vega-example-box .vega-preview--column {
+	align-items: stretch;
+	max-width: none;
+	margin-inline: 0;
+}
+
+/* =============================================
+   CODE PANEL (inside tab box)
+   ============================================= */
+.vega-code-panel {
+	background: var(--sl-color-bg-nav);
+}
+
+.vega-code-panel__toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.375rem 0.75rem 0.375rem 1.25rem;
+	border-bottom: 1px solid var(--sl-color-gray-6);
+}
+
+.vega-code-panel__lang {
+	font-family: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+	font-size: 0.6875rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--sl-color-gray-3);
+}
+
+.vega-copy-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	padding: 0.25rem 0.625rem;
+	font-size: 0.75rem;
+	font-weight: 500;
+	color: var(--sl-color-gray-3);
+	background: transparent;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.375rem;
+	cursor: pointer;
+	transition:
+		color 0.15s ease,
+		border-color 0.15s ease,
+		background-color 0.15s ease;
+	line-height: 1;
+}
+
+.vega-copy-btn:hover {
+	color: var(--sl-color-text);
+	border-color: var(--sl-color-gray-3);
+	background: var(--sl-color-gray-6);
+}
+
+.vega-copy-btn--copied {
+	color: #4ade80;
+	border-color: #4ade80;
+}
+
+.vega-code-pre {
+	margin: 0;
+	padding: 1.25rem 1.5rem;
+	font-family: ui-monospace, 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+	font-size: 0.8125rem;
+	line-height: 1.7;
+	color: var(--sl-color-text);
+	white-space: pre;
+	overflow-x: auto;
+	tab-size: 2;
+}
+
+.vega-code-pre code {
+	font-family: inherit;
+	font-size: inherit;
+	background: none;
+	padding: 0;
+	border-radius: 0;
+}
+
+/* ===================================================
+   HOMEPAGE — ANIMATED HERO (full-bleed, react-bits style)
+   =================================================== */
+
+/* Hide Starlight's default empty hero on splash page */
+.page .hero {
+	display: none;
+}
+
+/* Transparent header on homepage (pages with .vega-hero present).
+   Solidifies on scroll via the .vega-scrolled class added by AnimatedHero. */
+body:has(.vega-hero) header.header {
+	background: transparent !important;
+	backdrop-filter: none !important;
+	border-bottom: 1px solid transparent !important;
+	transition:
+		background 0.25s ease,
+		backdrop-filter 0.25s ease,
+		border-color 0.25s ease;
+}
+
+body:has(.vega-hero).vega-scrolled header.header {
+	background: rgba(15, 14, 26, 0.65) !important;
+	backdrop-filter: blur(14px) saturate(150%) !important;
+	border-bottom-color: var(--sl-color-gray-6) !important;
+}
+
+[data-theme='light'] body:has(.vega-hero).vega-scrolled header.header {
+	background: rgba(255, 255, 255, 0.7) !important;
+}
+
+.vega-hero {
+	--vega-mx: 50%;
+	--vega-my: 30%;
+	position: relative;
+	padding: 6rem 1.5rem 7rem;
+	margin: -3rem 0 4rem;
+	isolation: isolate;
+}
+
+/* Background spans the full viewport without shifting the hero content */
+.vega-hero__bg {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100vw;
+	z-index: 0;
+	overflow: hidden;
+	background: radial-gradient(ellipse at top, #1a0b3d 0%, #0a0418 60%, var(--sl-color-bg) 100%);
+}
+
+/* Content above bg, but text doesn't block canvas pointer events */
+.vega-hero__inner {
+	z-index: 2;
+}
+
+.vega-hero__badge,
+.vega-hero__title,
+.vega-hero__tagline,
+.vega-hero__codeblock {
+	pointer-events: none;
+}
+
+.vega-hero__actions,
+.vega-hero__cta {
+	pointer-events: auto;
+}
+
+.vega-hero__aurora,
+.vega-hero__spotlight,
+.vega-hero__vignette {
+	pointer-events: none;
+}
+
+[data-theme='light'] .vega-hero__bg {
+	background: radial-gradient(ellipse at top, #f5edff 0%, #faf9ff 60%, var(--sl-color-bg) 100%);
+}
+
+/* ============ AURORA — multiple soft animated blobs ============ */
+.vega-hero__aurora {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(110px);
+	opacity: 0.28;
+	will-change: transform;
+	mix-blend-mode: screen;
+}
+
+.vega-hero__aurora--1 {
+	width: 600px;
+	height: 600px;
+	background: radial-gradient(circle, #8b5cf6 0%, transparent 65%);
+	top: -180px;
+	left: -120px;
+	animation: vega-aurora-1 18s ease-in-out infinite;
+}
+
+.vega-hero__aurora--2 {
+	width: 520px;
+	height: 520px;
+	background: radial-gradient(circle, #ec4899 0%, transparent 65%);
+	bottom: -160px;
+	right: -100px;
+	animation: vega-aurora-2 22s ease-in-out infinite;
+}
+
+.vega-hero__aurora--3 {
+	width: 440px;
+	height: 440px;
+	background: radial-gradient(circle, #3b82f6 0%, transparent 65%);
+	top: 25%;
+	left: 35%;
+	opacity: 0.4;
+	animation: vega-aurora-3 26s ease-in-out infinite;
+}
+
+.vega-hero__aurora--4 {
+	width: 380px;
+	height: 380px;
+	background: radial-gradient(circle, #06b6d4 0%, transparent 65%);
+	top: 60%;
+	right: 25%;
+	opacity: 0.35;
+	animation: vega-aurora-4 24s ease-in-out infinite;
+}
+
+[data-theme='light'] .vega-hero__aurora {
+	mix-blend-mode: multiply;
+	opacity: 0.35;
+}
+
+@keyframes vega-aurora-1 {
+	0%, 100% { transform: translate(0, 0) scale(1); }
+	33% { transform: translate(120px, 80px) scale(1.1); }
+	66% { transform: translate(60px, 140px) scale(0.95); }
+}
+
+@keyframes vega-aurora-2 {
+	0%, 100% { transform: translate(0, 0) scale(1); }
+	33% { transform: translate(-130px, -90px) scale(0.9); }
+	66% { transform: translate(-80px, -50px) scale(1.05); }
+}
+
+@keyframes vega-aurora-3 {
+	0%, 100% { transform: translate(0, 0) scale(1); }
+	50% { transform: translate(-90px, 110px) scale(1.15); }
+}
+
+@keyframes vega-aurora-4 {
+	0%, 100% { transform: translate(0, 0) scale(1); }
+	50% { transform: translate(120px, -80px) scale(0.9); }
+}
+
+/* ============ SHAPEGRID (react-bits) — interactive grid bg ============ */
+.vega-hero__shapegrid {
+	position: absolute;
+	inset: 0;
+	pointer-events: auto;
+	mask-image: radial-gradient(ellipse 110% 90% at 50% 50%, black 55%, transparent 100%);
+	-webkit-mask-image: radial-gradient(ellipse 110% 90% at 50% 50%, black 55%, transparent 100%);
+}
+
+.vega-hero__shapegrid canvas {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+[data-theme='light'] .vega-hero__shapegrid {
+	opacity: 0.7;
+}
+
+/* ============ SPOTLIGHT — follows cursor ============ */
+.vega-hero__spotlight {
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(
+		600px circle at var(--vega-mx) var(--vega-my),
+		rgba(139, 92, 246, 0.18),
+		transparent 50%
+	);
+	transition: background 0.3s ease;
+	pointer-events: none;
+}
+
+[data-theme='light'] .vega-hero__spotlight {
+	background: radial-gradient(
+		600px circle at var(--vega-mx) var(--vega-my),
+		rgba(109, 40, 217, 0.12),
+		transparent 50%
+	);
+}
+
+/* ============ VIGNETTE — fades to page bg at the bottom ============ */
+.vega-hero__vignette {
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(to bottom, transparent 60%, var(--sl-color-bg) 100%),
+		linear-gradient(to right, var(--sl-color-bg) 0%, transparent 8%, transparent 92%, var(--sl-color-bg) 100%);
+	pointer-events: none;
+}
+
+.vega-hero__inner {
+	position: relative;
+	max-width: 1080px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.vega-hero__badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.4rem 0.875rem;
+	margin-bottom: 1.75rem;
+	font-size: 0.8125rem;
+	font-weight: 500;
+	color: var(--sl-color-accent-high);
+	background: var(--sl-color-accent-low);
+	border: 1px solid var(--sl-color-accent);
+	border-radius: 9999px;
+	backdrop-filter: blur(8px);
+}
+
+.vega-hero__badge-dot {
+	width: 0.5rem;
+	height: 0.5rem;
+	background: #4ade80;
+	border-radius: 50%;
+	box-shadow: 0 0 8px #4ade80;
+	animation: vega-pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes vega-pulse-dot {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.4; }
+}
+
+.vega-hero__title {
+	font-size: clamp(2.4rem, 6vw, 4.25rem);
+	font-weight: 800;
+	line-height: 1.05;
+	letter-spacing: -0.03em;
+	margin: 0 0 1.25rem;
+	color: var(--sl-color-white);
+}
+
+.vega-hero__title-rotator {
+	display: inline-block;
+	min-width: 5ch;
+	text-align: left;
+}
+
+.vega-hero__title-word {
+	display: inline-block;
+	background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f59e0b 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	animation: vega-word-in 0.4s ease;
+}
+
+@keyframes vega-word-in {
+	0% { opacity: 0; transform: translateY(0.4em) rotate(-4deg); }
+	100% { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+.vega-hero__title-gradient {
+	background: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 50%, #6d28d9 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+.vega-hero__tagline {
+	font-size: clamp(1rem, 1.5vw, 1.2rem);
+	line-height: 1.6;
+	color: var(--sl-color-gray-2);
+	max-width: 580px;
+	margin: 0 auto 2.25rem;
+}
+
+.vega-hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	justify-content: center;
+	margin-bottom: 3.5rem;
+}
+
+.vega-hero__cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1.5rem;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	border-radius: 0.625rem;
+	text-decoration: none;
+	transition:
+		transform 0.18s ease,
+		box-shadow 0.18s ease,
+		background 0.18s ease;
+	cursor: pointer;
+}
+
+.vega-hero__cta--primary {
+	color: white !important;
+	background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+	box-shadow:
+		0 1px 0 rgba(255, 255, 255, 0.1) inset,
+		0 8px 24px -8px rgba(139, 92, 246, 0.6);
+}
+
+.vega-hero__cta--primary:hover {
+	transform: translateY(-2px);
+	box-shadow:
+		0 1px 0 rgba(255, 255, 255, 0.15) inset,
+		0 14px 32px -8px rgba(139, 92, 246, 0.8);
+}
+
+.vega-hero__cta--ghost {
+	color: var(--sl-color-text) !important;
+	background: transparent;
+	border: 1px solid var(--sl-color-gray-5);
+}
+
+.vega-hero__cta--ghost:hover {
+	background: var(--sl-color-gray-6);
+	border-color: var(--sl-color-gray-4);
+	transform: translateY(-1px);
+}
+
+.vega-hero__codeblock {
+	max-width: 540px;
+	margin: 0 auto;
+	text-align: left;
+	background: rgba(15, 15, 28, 0.6);
+	backdrop-filter: blur(20px);
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.875rem;
+	overflow: hidden;
+	box-shadow:
+		0 20px 60px -20px rgba(0, 0, 0, 0.6),
+		0 0 0 1px rgba(139, 92, 246, 0.1);
+}
+
+[data-theme='light'] .vega-hero__codeblock {
+	background: rgba(255, 255, 255, 0.7);
+}
+
+.vega-hero__codeblock-bar {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.625rem 0.875rem;
+	border-bottom: 1px solid var(--sl-color-gray-6);
+	background: rgba(255, 255, 255, 0.02);
+}
+
+.vega-hero__codeblock-dot {
+	width: 0.625rem;
+	height: 0.625rem;
+	border-radius: 50%;
+}
+
+.vega-hero__codeblock-dot--r { background: #ff5f56; }
+.vega-hero__codeblock-dot--y { background: #ffbd2e; }
+.vega-hero__codeblock-dot--g { background: #27c93f; }
+
+.vega-hero__codeblock-name {
+	margin-left: 0.5rem;
+	font-family: ui-monospace, 'Cascadia Code', monospace;
+	font-size: 0.75rem;
+	color: var(--sl-color-gray-3);
+}
+
+.vega-hero__codeblock-pre {
+	margin: 0;
+	padding: 1rem 1.25rem;
+	font-family: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+	font-size: 0.8125rem;
+	line-height: 1.65;
+	color: var(--sl-color-text);
+	overflow-x: auto;
+}
+
+.vega-tk-keyword { color: #c084fc; }
+.vega-tk-string { color: #86efac; }
+.vega-tk-tag { color: #f472b6; }
+.vega-tk-attr { color: #fdba74; }
+.vega-tk-fn { color: #60a5fa; }
+.vega-tk-punct { color: var(--sl-color-gray-3); }
+
+[data-theme='light'] .vega-tk-keyword { color: #7c3aed; }
+[data-theme='light'] .vega-tk-string { color: #16a34a; }
+[data-theme='light'] .vega-tk-tag { color: #db2777; }
+[data-theme='light'] .vega-tk-attr { color: #c2410c; }
+[data-theme='light'] .vega-tk-fn { color: #2563eb; }
+
+/* ===================================================
+   HOMEPAGE — STATS BAR
+   =================================================== */
+
+.vega-stats {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-auto-rows: 1fr;
+	align-items: stretch;
+	gap: 1rem;
+	max-width: 1080px;
+	margin: 0 auto 4rem;
+}
+
+.vega-stat {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	min-height: 140px;
+	padding: 1.75rem 1rem;
+	text-align: center;
+	background: var(--sl-color-bg-sidebar);
+	border: 1px solid var(--sl-color-gray-6);
+	border-radius: 1rem;
+	box-sizing: border-box;
+	transition:
+		transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		border-color 0.25s ease,
+		background 0.25s ease,
+		box-shadow 0.25s ease;
+}
+
+.vega-stat > * {
+	margin: 0;
+}
+
+.vega-stat:hover {
+	transform: translateY(-4px);
+	background: var(--sl-color-bg);
+	border-color: rgba(139, 92, 246, 0.5);
+	box-shadow:
+		0 0 0 1px rgba(139, 92, 246, 0.15),
+		0 18px 40px -20px rgba(139, 92, 246, 0.35);
+}
+
+@media (max-width: 900px) {
+	.vega-stats {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 480px) {
+	.vega-stats {
+		grid-template-columns: 1fr;
+	}
+}
+
+.vega-stat__num {
+	font-size: 2.25rem;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	line-height: 1;
+}
+
+.vega-stat__label {
+	margin-top: 0.5rem;
+	font-size: 0.8125rem;
+	font-weight: 500;
+	color: var(--sl-color-gray-3);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+/* ===================================================
+   HOMEPAGE — FEATURE GRID
+   =================================================== */
+
+.vega-features {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: 1fr;
+	align-items: stretch;
+	gap: 1rem;
+	max-width: 1080px;
+	margin: 0 auto 4rem;
+}
+
+@media (max-width: 900px) {
+	.vega-features {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 600px) {
+	.vega-features {
+		grid-template-columns: 1fr;
+	}
+}
+
+.vega-feature {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+	height: 100%;
+	padding: 1.75rem;
+	min-height: 220px;
+	background: var(--sl-color-bg-sidebar);
+	border: 1px solid var(--sl-color-gray-6);
+	border-radius: 1rem;
+	box-sizing: border-box;
+	transition:
+		transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		border-color 0.25s ease,
+		box-shadow 0.25s ease,
+		background 0.25s ease;
+	overflow: hidden;
+	isolation: isolate;
+}
+
+.vega-feature > * {
+	margin-block: 0;
+}
+
+.vega-feature::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(
+		circle at 50% 0%,
+		rgba(139, 92, 246, 0.18),
+		transparent 70%
+	);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.vega-feature:hover {
+	transform: translateY(-4px);
+	border-color: rgba(139, 92, 246, 0.5);
+	background: var(--sl-color-bg);
+	box-shadow:
+		0 0 0 1px rgba(139, 92, 246, 0.15),
+		0 18px 40px -20px rgba(139, 92, 246, 0.35);
+}
+
+.vega-feature:hover::before {
+	opacity: 1;
+}
+
+.vega-feature > * {
+	position: relative;
+	z-index: 1;
+}
+
+.vega-feature__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	margin-bottom: 1rem;
+	color: var(--sl-color-accent-high);
+	background: var(--sl-color-accent-low);
+	border-radius: 0.625rem;
+	border: 1px solid var(--sl-color-accent);
+}
+
+.vega-feature__title {
+	margin: 0 0 0.5rem;
+	font-size: 1.125rem;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	color: var(--sl-color-white);
+}
+
+.vega-feature__text {
+	margin: 0;
+	font-size: 0.9375rem;
+	line-height: 1.55;
+	color: var(--sl-color-gray-2);
+}
+
+.vega-feature__text code {
+	font-size: 0.85em;
+	padding: 0.1em 0.35em;
+	background: var(--sl-color-gray-6);
+	border-radius: 0.25rem;
+}
+
+/* ===================================================
+   HOMEPAGE — CTA
+   =================================================== */
+
+.vega-cta {
+	max-width: 720px;
+	margin: 4rem auto 2rem;
+	padding: 3rem 2rem;
+	text-align: center;
+	background: linear-gradient(
+		135deg,
+		var(--sl-color-accent-low) 0%,
+		transparent 100%
+	);
+	border: 1px solid var(--sl-color-accent);
+	border-radius: 1.25rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.vega-cta::before {
+	content: '';
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: conic-gradient(
+		from 0deg,
+		transparent,
+		rgba(139, 92, 246, 0.1),
+		transparent,
+		transparent,
+		rgba(236, 72, 153, 0.1),
+		transparent
+	);
+	animation: vega-cta-spin 14s linear infinite;
+	z-index: 0;
+}
+
+.vega-cta > * {
+	position: relative;
+	z-index: 1;
+}
+
+@keyframes vega-cta-spin {
+	to { transform: rotate(360deg); }
+}
+
+.vega-cta__title {
+	margin: 0 0 0.5rem;
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	color: var(--sl-color-white);
+}
+
+.vega-cta__text {
+	margin: 0 0 1.75rem;
+	color: var(--sl-color-gray-2);
+}
+
+.vega-cta__install {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 0 auto 1.25rem;
+	padding: 0.875rem 1.5rem;
+	font-family: ui-monospace, 'Cascadia Code', monospace;
+	font-size: 0.95rem;
+	background: var(--sl-color-bg);
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.625rem;
+}
+
+.vega-cta__install code {
+	background: none;
+	padding: 0;
+	color: var(--sl-color-text);
+}
+
+.vega-cta__link {
+	display: inline-block;
+	color: var(--sl-color-accent-high) !important;
+	font-weight: 600;
+	text-decoration: none;
+	transition: transform 0.15s ease;
+}
+
+.vega-cta__link:hover {
+	transform: translateX(3px);
+}
+
+/* ===================================================
+   HOMEPAGE — RESPONSIVE
+   =================================================== */
+
+@media (max-width: 640px) {
+	.vega-hero {
+		padding: 2.5rem 1rem 3rem;
+	}
+
+	.vega-hero__codeblock {
+		font-size: 0.7rem;
+	}
+
+	.vega-features {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.vega-hero__orb,
+	.vega-hero__badge-dot,
+	.vega-hero__title-word,
+	.vega-cta::before {
+		animation: none;
+	}
 }

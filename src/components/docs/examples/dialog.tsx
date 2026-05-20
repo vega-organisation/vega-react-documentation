@@ -9,7 +9,10 @@ export default function DialogExamplesShowcase() {
 
 	return (
 		<div className="vega-doc-examples">
-			<ExampleSection title="Confirm dialog">
+			<ExampleSection
+				title="Confirm dialog"
+				code={`const [open, setOpen] = useState(false);\n\n<Button variant="primary" onClick={() => setOpen(true)}>\n  Open dialog\n</Button>\n\n<Dialog open={open} onClose={() => setOpen(false)}>\n  <Dialog.Header onClose={() => setOpen(false)}>Confirm action</Dialog.Header>\n  <Dialog.Body>Are you sure? This cannot be undone.</Dialog.Body>\n  <Dialog.Footer>\n    <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>\n    <Button variant="danger" onClick={() => setOpen(false)}>Delete</Button>\n  </Dialog.Footer>\n</Dialog>`}
+			>
 				<Button variant="primary" onClick={() => setOpen(true)}>
 					Open dialog
 				</Button>
@@ -26,7 +29,11 @@ export default function DialogExamplesShowcase() {
 					</Dialog.Footer>
 				</Dialog>
 			</ExampleSection>
-			<ExampleSection title="Sizes">
+
+			<ExampleSection
+				title="Sizes"
+				code={`// size: 'sm' | 'md' | 'lg'\n<Dialog open={open} onClose={() => setOpen(false)} size="md">\n  <Dialog.Header onClose={() => setOpen(false)}>Size: md</Dialog.Header>\n  <Dialog.Body>Dialog size preview.</Dialog.Body>\n</Dialog>`}
+			>
 				{(['sm', 'md', 'lg'] as const).map((s) => (
 					<Button key={s} variant="secondary" size="small" onClick={() => setSize(s)}>
 						{s}
